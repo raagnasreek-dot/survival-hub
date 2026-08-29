@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nearby Services</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins;
+}
+
+body{
+background:linear-gradient(135deg,#141e30,#243b55);
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+}
+
+/* PHONE FRAME */
+
+.phone{
+width:380px;
+height:760px;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(25px);
+border-radius:40px;
+box-shadow:0 30px 80px rgba(0,0,0,0.6);
+overflow-y:auto;
+border:1px solid rgba(255,255,255,0.2);
+padding:25px;
+color:white;
+}
+
+/* HEADER */
+
+.header{
+font-size:24px;
+font-weight:600;
+margin-bottom:5px;
+}
+
+.sub{
+font-size:14px;
+opacity:0.8;
+margin-bottom:20px;
+}
+
+/* CARD */
+
+.card{
+background:rgba(255,255,255,0.12);
+padding:18px;
+margin-bottom:15px;
+border-radius:18px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+transition:0.3s;
+}
+
+.card:hover{
+transform:scale(1.03);
+background:rgba(255,255,255,0.18);
+}
+
+.map-btn{
+background:linear-gradient(135deg,#00c6ff,#0072ff);
+padding:8px 14px;
+border-radius:10px;
+font-size:14px;
+color:white;
+text-decoration:none;
+}
+
+small{
+opacity:0.7;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="phone">
+
+<div class="header">📍 Nearby Services</div>
+<div class="sub">Services available around you</div>
+
+<div class="card">
+<div>
+🍛 Free Food Center <br>
+<small>Abids, Hyderabad</small>
+</div>
+<a class="map-btn" href="https://maps.google.com" target="_blank">Map</a>
+</div>
+
+<div class="card">
+<div>
+🏥 Government Hospital <br>
+<small>Koti, Hyderabad</small>
+</div>
+<a class="map-btn" href="https://maps.google.com" target="_blank">Map</a>
+</div>
+
+<div class="card">
+<div>
+💼 Employment Office <br>
+<small>Secunderabad</small>
+</div>
+<a class="map-btn" href="https://maps.google.com" target="_blank">Map</a>
+</div>
+
+<div class="card">
+<div>
+🏛 MeeSeva Center <br>
+<small>Himayatnagar</small>
+</div>
+<a class="map-btn" href="https://maps.google.com" target="_blank">Map</a>
+</div>
+
+</div>
+
+</body>
+</html>

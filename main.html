@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Survival Hub</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            background: linear-gradient(135deg, #141e30, #243b55);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* MAIN APP */
+
+        .phone {
+            width: 100%;
+            max-width: 430px;
+            height: min(850px, 95vh);
+
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(25px);
+
+            border-radius: 40px;
+
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.6);
+
+            overflow: hidden;
+
+            display: flex;
+            flex-direction: column;
+
+            position: relative;
+
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+
+        /* STATUS BAR */
+
+        .status {
+            height: 32px;
+            min-height: 32px;
+
+            color: white;
+            font-size: 12px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 0 20px;
+        }
+
+
+        /* HEADER */
+
+        .header {
+            padding: 20px 24px 15px;
+            color: white;
+        }
+
+        .header h2 {
+            font-size: clamp(21px, 6vw, 27px);
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 13px;
+            opacity: 0.8;
+            margin-top: 3px;
+        }
+
+
+        /* AI BUTTON */
+
+        .voice-btn {
+            position: absolute;
+
+            top: 65px;
+            right: 20px;
+
+            width: 52px;
+            height: 52px;
+
+            border-radius: 50%;
+
+            background: linear-gradient(
+                135deg,
+                #00c6ff,
+                #0072ff
+            );
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 23px;
+            color: white;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+            box-shadow:
+                0 8px 25px rgba(0, 114, 255, 0.35);
+        }
+
+        .voice-btn:hover {
+            transform: scale(1.08);
+        }
+
+
+        /* CONTENT */
+
+        .content {
+            flex: 1;
+
+            padding: 20px 22px 100px;
+
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 18px;
+
+            overflow-y: auto;
+        }
+
+
+        /* CARDS */
+
+        .card {
+            min-height: 150px;
+
+            border-radius: 28px;
+
+            background: rgba(255, 255, 255, 0.12);
+
+            display: flex;
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+
+            font-size: clamp(38px, 10vw, 52px);
+
+            color: white;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .card span {
+            font-size: 14px;
+            font-weight: 500;
+            margin-top: 8px;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .card:active {
+            transform: scale(0.96);
+        }
+
+
+        /* EMERGENCY BUTTON */
+
+        .fab {
+            position: absolute;
+
+            bottom: 92px;
+            right: 22px;
+
+            width: 60px;
+            height: 60px;
+
+            border-radius: 50%;
+
+            background: linear-gradient(
+                135deg,
+                #ff512f,
+                #dd2476
+            );
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 26px;
+
+            color: white;
+
+            text-decoration: none;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 10px 30px rgba(221, 36, 118, 0.4);
+
+            z-index: 5;
+        }
+
+
+        /* NAVBAR */
+
+        .bottom-nav {
+            height: 78px;
+            min-height: 78px;
+
+            background: rgba(255, 255, 255, 0.1);
+
+            display: flex;
+
+            justify-content: space-around;
+            align-items: center;
+
+            color: white;
+
+            border-top:
+                1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .nav-item {
+            flex: 1;
+
+            display: flex;
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+
+            gap: 4px;
+
+            font-size: 12px;
+
+            cursor: pointer;
+
+            opacity: 0.8;
+
+            transition: 0.2s;
+        }
+
+        .nav-item:hover {
+            opacity: 1;
+            transform: translateY(-2px);
+        }
+
+        .nav-item:first-child {
+            opacity: 1;
+        }
+
+        .nav-icon {
+            font-size: 22px;
+        }
+
+
+        /* AI CHAT */
+
+        .chat {
+            position: absolute;
+
+            bottom: 0;
+            left: 0;
+
+            width: 100%;
+            height: 65%;
+
+            background: white;
+
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;
+
+            display: none;
+
+            flex-direction: column;
+
+            z-index: 10;
+
+            box-shadow:
+                0 -10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .chat-header {
+            background: #0072ff;
+
+            color: white;
+
+            padding: 15px;
+
+            text-align: center;
+
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;
+
+            font-weight: 600;
+        }
+
+        .close-chat {
+            position: absolute;
+
+            right: 15px;
+            top: 10px;
+
+            color: white;
+
+            font-size: 20px;
+
+            cursor: pointer;
+        }
+
+        .chat-messages {
+            flex: 1;
+
+            padding: 15px;
+
+            overflow-y: auto;
+        }
+
+        .bot,
+        .user {
+            padding: 9px 13px;
+
+            border-radius: 15px;
+
+            margin: 7px 0;
+
+            max-width: 80%;
+
+            font-size: 13px;
+        }
+
+        .bot {
+            background: #eee;
+            width: max-content;
+        }
+
+        .user {
+            background: #0072ff;
+            color: white;
+
+            margin-left: auto;
+
+            width: max-content;
+        }
+
+        .chat-input {
+            display: flex;
+
+            border-top: 1px solid #ddd;
+
+            padding: 8px;
+        }
+
+        .chat-input input {
+            flex: 1;
+
+            padding: 12px;
+
+            border: none;
+
+            outline: none;
+
+            font-size: 14px;
+        }
+
+        .chat-input button {
+            background: #0072ff;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 10px;
+
+            padding: 10px 16px;
+
+            cursor: pointer;
+        }
+
+
+        /* TABLET */
+
+        @media (min-width: 600px) {
+
+            .phone {
+                max-width: 500px;
+            }
+
+            .content {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 22px;
+            }
+
+            .card {
+                min-height: 170px;
+            }
+        }
+
+
+        /* SMALL PHONES */
+
+        @media (max-width: 380px) {
+
+            body {
+                padding: 0;
+            }
+
+            .phone {
+                width: 100%;
+                height: 100vh;
+
+                min-height: 100vh;
+
+                border-radius: 0;
+
+                border: none;
+            }
+
+            .status {
+                padding: 0 15px;
+            }
+
+            .header {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .content {
+                padding: 15px 15px 95px;
+
+                gap: 12px;
+            }
+
+            .card {
+                min-height: 135px;
+                border-radius: 22px;
+            }
+
+            .fab {
+                right: 17px;
+                bottom: 88px;
+            }
+
+            .bottom-nav {
+                height: 72px;
+                min-height: 72px;
+            }
+        }
+
+
+        /* VERY SMALL PHONES */
+
+        @media (max-width: 320px) {
+
+            .content {
+                gap: 10px;
+            }
+
+            .card {
+                min-height: 120px;
+                font-size: 38px;
+            }
+
+            .card span {
+                font-size: 12px;
+            }
+
+            .voice-btn {
+                width: 46px;
+                height: 46px;
+                right: 15px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="phone">
+
+
+    <!-- STATUS BAR -->
+
+    <div class="status">
+
+        <div id="time">14:26</div>
+
+        <div>
+            📶 🔋85%
+        </div>
+
+    </div>
+
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <h2>Survival Hub</h2>
+
+        <p>
+            Smart Assistance for Everyone
+        </p>
+
+    </div>
+
+
+    <!-- AI BUTTON -->
+
+    <div
+        class="voice-btn"
+        onclick="openAI()"
+    >
+        🤖
+    </div>
+
+
+    <!-- MAIN CONTENT -->
+
+    <div class="content">
+
+
+        <!-- FOOD -->
+
+        <div
+            class="card"
+            onclick="location.href='/food'"
+        >
+
+            🍛
+
+            <span>
+                Food
+            </span>
+
+        </div>
+
+
+        <!-- JOBS -->
+
+        <div
+            class="card"
+            onclick="location.href='/jobs'"
+        >
+
+            💼
+
+            <span>
+                Jobs
+            </span>
+
+        </div>
+
+
+        <!-- HEALTH -->
+
+        <div
+            class="card"
+            onclick="location.href='/health'"
+        >
+
+            ❤️
+
+            <span>
+                Health
+            </span>
+
+        </div>
+
+
+        <!-- SCHEMES -->
+
+        <div
+            class="card"
+            onclick="location.href='/schemes'"
+        >
+
+            🏛
+
+            <span>
+                Schemes
+            </span>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- EMERGENCY -->
+
+    <a
+        href="tel:112"
+        class="fab"
+        aria-label="Emergency call"
+    >
+        📞
+    </a>
+
+
+    <!-- BOTTOM NAV -->
+
+    <div class="bottom-nav">
+
+
+        <!-- HOME -->
+
+        <div
+            class="nav-item"
+            onclick="location.href='/'"
+        >
+
+            <div class="nav-icon">
+                🏠
+            </div>
+
+            <span>
+                Home
+            </span>
+
+        </div>
+
+
+        <!-- NEARBY -->
+
+        <div
+            class="nav-item"
+            onclick="location.href='/nearby'"
+        >
+
+            <div class="nav-icon">
+                📍
+            </div>
+
+            <span>
+                Nearby
+            </span>
+
+        </div>
+
+
+        <!-- PROFILE -->
+
+        <div
+            class="nav-item"
+            onclick="location.href='/profile'"
+        >
+
+            <div class="nav-icon">
+                👤
+            </div>
+
+            <span>
+                Profile
+            </span>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- AI CHAT -->
+
+    <div
+        class="chat"
+        id="chat"
+    >
+
+        <div class="chat-header">
+
+            AI Assistant
+
+            <span
+                class="close-chat"
+                onclick="closeAI()"
+            >
+                ×
+            </span>
+
+        </div>
+
+
+        <div
+            class="chat-messages"
+            id="messages"
+        >
+
+            <div class="bot">
+                Hello 👋 How can I help you?
+            </div>
+
+        </div>
+
+
+        <div class="chat-input">
+
+            <input
+                id="input"
+                type="text"
+                placeholder="Ask about food, jobs..."
+                onkeydown="handleEnter(event)"
+            >
+
+            <button onclick="send()">
+                Send
+            </button>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+
+    /* AI OPEN */
+
+    function openAI() {
+
+        document.getElementById("chat").style.display = "flex";
+
+        document.getElementById("input").focus();
+
+    }
+
+
+    /* AI CLOSE */
+
+    function closeAI() {
+
+        document.getElementById("chat").style.display = "none";
+
+    }
+
+
+    /* ENTER KEY */
+
+    function handleEnter(event) {
+
+        if (event.key === "Enter") {
+
+            send();
+
+        }
+
+    }
+
+
+    /* AI CHAT */
+
+    function send() {
+
+        let input =
+            document.getElementById("input");
+
+        let msg =
+            input.value.trim();
+
+
+        if (msg === "") {
+
+            return;
+
+        }
+
+
+        let box =
+            document.getElementById("messages");
+
+
+        /* USER MESSAGE */
+
+        let user =
+            document.createElement("div");
+
+        user.className = "user";
+
+        user.innerText = msg;
+
+        box.appendChild(user);
+
+
+        /* BOT MESSAGE */
+
+        let bot =
+            document.createElement("div");
+
+        bot.className = "bot";
+
+
+        let text =
+            msg.toLowerCase();
+
+
+        if (text.includes("food")) {
+
+            bot.innerText =
+                "You can find nearby food centers in the Food section.";
+
+        }
+
+        else if (text.includes("job")) {
+
+            bot.innerText =
+                "Jobs are listed under the Jobs section.";
+
+        }
+
+        else if (
+            text.includes("health") ||
+            text.includes("hospital")
+        ) {
+
+            bot.innerText =
+                "You can find health and hospital information in the Health section.";
+
+        }
+
+        else if (text.includes("scheme")) {
+
+            bot.innerText =
+                "Government schemes are available in the Schemes section.";
+
+        }
+
+        else {
+
+            bot.innerText =
+                "I can help with Food, Jobs, Health, and Schemes.";
+
+        }
+
+
+        box.appendChild(bot);
+
+
+        input.value = "";
+
+
+        box.scrollTop =
+            box.scrollHeight;
+
+    }
+
+
+    /* LIVE TIME */
+
+    function updateTime() {
+
+        const now = new Date();
+
+        let hours =
+            now.getHours();
+
+        let minutes =
+            now.getMinutes();
+
+
+        hours =
+            String(hours).padStart(2, "0");
+
+        minutes =
+            String(minutes).padStart(2, "0");
+
+
+        document.getElementById("time").innerText =
+            hours + ":" + minutes;
+
+    }
+
+
+    updateTime();
+
+    setInterval(updateTime, 30000);
+
+</script>
+
+
+</body>
+
+</html>

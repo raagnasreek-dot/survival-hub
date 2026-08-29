@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Food Finder</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+
+        body {
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #141e30,
+                    #243b55
+                );
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 20px;
+        }
+
+
+        /* MAIN APP */
+
+        .phone {
+            width: 100%;
+            max-width: 430px;
+
+            height: min(850px, 95vh);
+
+            background: rgba(255, 255, 255, 0.08);
+
+            backdrop-filter: blur(25px);
+
+            border-radius: 35px;
+
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.6);
+
+            overflow: hidden;
+
+            display: flex;
+            flex-direction: column;
+
+            border: 1px solid rgba(255, 255, 255, 0.2);
+
+            color: white;
+        }
+
+
+        /* HEADER */
+
+        .header {
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff7e5f,
+                    #ff9966
+                );
+
+            padding: 18px 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+        }
+
+
+        .back {
+            font-size: 22px;
+
+            cursor: pointer;
+
+            width: 35px;
+            height: 35px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            transition: 0.2s;
+        }
+
+
+        .back:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+
+        .header h2 {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+
+        /* CONTENT */
+
+        .content {
+            flex: 1;
+
+            overflow-y: auto;
+
+            padding: 18px;
+        }
+
+
+        /* SECTION TITLE */
+
+        .section-title {
+            font-size: 15px;
+
+            margin: 10px 0 12px;
+
+            opacity: 0.9;
+
+            font-weight: 500;
+        }
+
+
+        /* CARD */
+
+        .card {
+            background: rgba(255, 255, 255, 0.12);
+
+            padding: 15px;
+
+            border-radius: 18px;
+
+            margin-bottom: 12px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 12px;
+
+            transition: 0.25s;
+
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+
+        .card:hover {
+            background: rgba(255, 255, 255, 0.2);
+
+            transform: translateY(-3px);
+        }
+
+
+        /* INFORMATION */
+
+        .info {
+            min-width: 0;
+        }
+
+
+        .info h3 {
+            font-size: 15px;
+
+            margin-bottom: 4px;
+
+            font-weight: 600;
+        }
+
+
+        .info p {
+            font-size: 12px;
+
+            opacity: 0.8;
+
+            line-height: 1.5;
+        }
+
+
+        .phone-number {
+            margin-top: 3px;
+
+            font-size: 11px !important;
+
+            opacity: 0.7 !important;
+        }
+
+
+        /* MAP BUTTON */
+
+        .map-btn {
+            flex-shrink: 0;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #00c6ff,
+                    #0072ff
+                );
+
+            border: none;
+
+            color: white;
+
+            padding: 8px 13px;
+
+            border-radius: 10px;
+
+            font-size: 11px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+
+        .map-btn:hover {
+            transform: scale(1.05);
+        }
+
+
+        .map-btn:active {
+            transform: scale(0.95);
+        }
+
+
+        /* NO DATA MESSAGE */
+
+        .no-data {
+            text-align: center;
+
+            padding: 40px 20px;
+
+            font-size: 13px;
+
+            opacity: 0.75;
+        }
+
+
+        /* FOOTER */
+
+        .footer {
+            text-align: center;
+
+            font-size: 11px;
+
+            padding: 10px;
+
+            opacity: 0.7;
+
+            border-top:
+                1px solid rgba(255, 255, 255, 0.08);
+        }
+
+
+        /* SMALL PHONES */
+
+        @media (max-width: 380px) {
+
+            body {
+                padding: 0;
+            }
+
+
+            .phone {
+                width: 100%;
+
+                height: 100vh;
+
+                min-height: 100vh;
+
+                border-radius: 0;
+
+                border: none;
+            }
+
+
+            .header {
+                padding: 16px;
+            }
+
+
+            .header h2 {
+                font-size: 18px;
+            }
+
+
+            .content {
+                padding: 15px;
+            }
+
+
+            .card {
+                padding: 13px;
+            }
+
+
+            .info h3 {
+                font-size: 14px;
+            }
+
+
+            .info p {
+                font-size: 11px;
+            }
+
+
+            .map-btn {
+                padding: 7px 10px;
+            }
+        }
+
+
+        /* VERY SMALL PHONES */
+
+        @media (max-width: 320px) {
+
+            .card {
+                align-items: flex-start;
+            }
+
+
+            .map-btn {
+                font-size: 10px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="phone">
+
+
+        <!-- HEADER -->
+
+        <div class="header">
+
+            <div
+                class="back"
+                onclick="history.back()"
+            >
+                ⬅
+            </div>
+
+            <h2>🍛 Food Finder</h2>
+
+        </div>
+
+
+        <!-- CONTENT -->
+
+        <div class="content">
+
+
+            <div class="section-title">
+                🍽 Food Locations
+            </div>
+
+
+            <!--
+                FOOD DATA COMES FROM MYSQL
+
+                Flask sends:
+                food_centers
+
+                Each item contains:
+                food_id
+                center_name
+                location
+                phone
+                latitude
+                longitude
+            -->
+
+
+            {% if food_centers %}
+
+                {% for food in food_centers %}
+
+                    <div class="card">
+
+                        <div class="info">
+
+                            <h3>
+                                {{ food.center_name }}
+                            </h3>
+
+                            <p>
+                                📍 {{ food.location }}
+                            </p>
+
+                            {% if food.phone %}
+
+                                <p class="phone-number">
+                                    📞 {{ food.phone }}
+                                </p>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <button
+                            class="map-btn"
+                            onclick="openMap(
+                                '{{ food.latitude }}',
+                                '{{ food.longitude }}',
+                                '{{ food.center_name }}'
+                            )"
+                        >
+                            📍 Map
+                        </button>
+
+                    </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <div class="no-data">
+
+                    🍽️ No food centers available right now.
+
+                </div>
+
+            {% endif %}
+
+
+        </div>
+
+
+        <!-- FOOTER -->
+
+        <div class="footer">
+
+            Helping people find food ❤️
+
+        </div>
+
+
+    </div>
+
+
+    <script>
+
+        function openMap(latitude, longitude, place) {
+
+            let url;
+
+            /*
+                If latitude and longitude are available,
+                open exact location.
+            */
+
+            if (
+                latitude &&
+                longitude &&
+                latitude !== "None" &&
+                longitude !== "None"
+            ) {
+
+                url =
+                    "https://www.google.com/maps/search/?api=1&query="
+                    + encodeURIComponent(latitude + "," + longitude);
+
+            }
+
+            /*
+                Otherwise search using the place name.
+            */
+
+            else {
+
+                url =
+                    "https://www.google.com/maps/search/?api=1&query="
+                    + encodeURIComponent(place);
+
+            }
+
+
+            window.open(url, "_blank");
+
+        }
+
+    </script>
+
+</body>
+
+</html>

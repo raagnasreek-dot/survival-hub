@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Job Opportunities</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+
+        body {
+            background: linear-gradient(135deg, #141e30, #243b55);
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            min-height: 100vh;
+        }
+
+
+        /* PHONE FRAME */
+
+        .phone {
+
+            width: 380px;
+
+            height: 760px;
+
+            max-width: 100%;
+
+            background: rgba(255, 255, 255, 0.08);
+
+            backdrop-filter: blur(25px);
+
+            border-radius: 40px;
+
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.6);
+
+            overflow: hidden;
+
+            display: flex;
+
+            flex-direction: column;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.2);
+
+            color: white;
+        }
+
+
+        /* HEADER */
+
+        .header {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #007bff,
+                    #4dabf7
+                );
+
+            padding: 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+
+        .back {
+
+            font-size: 22px;
+
+            cursor: pointer;
+        }
+
+
+        .header h2 {
+
+            font-size: 20px;
+        }
+
+
+        /* SEARCH BAR */
+
+        .search {
+
+            padding: 15px;
+        }
+
+
+        .search input {
+
+            width: 100%;
+
+            padding: 10px;
+
+            border-radius: 10px;
+
+            border: none;
+
+            outline: none;
+
+            font-size: 14px;
+        }
+
+
+        /* CONTENT */
+
+        .content {
+
+            flex: 1;
+
+            overflow-y: auto;
+
+            padding: 15px;
+        }
+
+
+        /* JOB CARD */
+
+        .card {
+
+            background:
+                rgba(255, 255, 255, 0.12);
+
+            padding: 18px;
+
+            border-radius: 18px;
+
+            margin-bottom: 15px;
+
+            transition: 0.3s;
+        }
+
+
+        .card:hover {
+
+            background:
+                rgba(255, 255, 255, 0.2);
+
+            transform:
+                translateY(-4px);
+        }
+
+
+        .card h3 {
+
+            font-size: 15px;
+
+            margin-bottom: 4px;
+        }
+
+
+        .company {
+
+            font-size: 12px;
+
+            margin-bottom: 5px;
+
+            opacity: 0.9;
+        }
+
+
+        .location {
+
+            font-size: 12px;
+
+            opacity: 0.85;
+
+            margin-bottom: 10px;
+        }
+
+
+        .contact {
+
+            font-size: 11px;
+
+            opacity: 0.75;
+
+            margin-bottom: 12px;
+        }
+
+
+        /* BUTTON */
+
+        .btn {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff512f,
+                    #dd2476
+                );
+
+            border: none;
+
+            color: white;
+
+            padding: 7px 15px;
+
+            border-radius: 10px;
+
+            font-size: 12px;
+
+            cursor: pointer;
+        }
+
+
+        .btn:hover {
+
+            transform: scale(1.05);
+        }
+
+
+        /* NO DATA */
+
+        .no-data {
+
+            text-align: center;
+
+            padding: 40px 20px;
+
+            font-size: 13px;
+
+            opacity: 0.75;
+        }
+
+
+        /* SMALL SCREENS */
+
+        @media (max-width: 400px) {
+
+            body {
+                padding: 0;
+            }
+
+            .phone {
+
+                width: 100%;
+
+                height: 100vh;
+
+                border-radius: 0;
+
+                border: none;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="phone">
+
+
+        <!-- HEADER -->
+
+        <div class="header">
+
+            <div
+                class="back"
+                onclick="history.back()"
+            >
+                ⬅
+            </div>
+
+            <h2>💼 Job Opportunities</h2>
+
+        </div>
+
+
+        <!-- SEARCH -->
+
+        <div class="search">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search jobs..."
+                onkeyup="searchJobs()"
+            >
+
+        </div>
+
+
+        <!-- JOB LIST -->
+
+        <div
+            class="content"
+            id="jobList"
+        >
+
+
+            <div class="section-title">
+
+                💼 Available Jobs
+
+            </div>
+
+
+            <!--
+                JOB DATA COMES FROM MYSQL
+
+                Flask sends:
+                jobs
+
+                Each job contains:
+                job_id
+                job_title
+                company
+                location
+                contact
+            -->
+
+
+            {% if jobs %}
+
+
+                {% for job in jobs %}
+
+
+                    <div class="card">
+
+
+                        <h3>
+
+                            {{ job.job_title }}
+
+                        </h3>
+
+
+                        <div class="company">
+
+                            🏢 {{ job.company }}
+
+                        </div>
+
+
+                        <div class="location">
+
+                            📍 {{ job.location }}
+
+                        </div>
+
+
+                        {% if job.contact %}
+
+                            <div class="contact">
+
+                                📞 {{ job.contact }}
+
+                            </div>
+
+                        {% endif %}
+
+
+                        {% if job.contact %}
+
+                            <button
+                                class="btn"
+                                onclick="contactJob('{{ job.contact }}')"
+                            >
+
+                                📞 Contact
+
+                            </button>
+
+                        {% endif %}
+
+
+                    </div>
+
+
+                {% endfor %}
+
+
+            {% else %}
+
+
+                <div class="no-data">
+
+                    💼 No job opportunities available right now.
+
+                </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <script>
+
+
+        /* SEARCH JOBS */
+
+        function searchJobs() {
+
+            let input =
+                document
+                    .getElementById("searchInput")
+                    .value
+                    .toLowerCase();
+
+
+            let cards =
+                document.querySelectorAll(".card");
+
+
+            cards.forEach(function(card) {
+
+
+                let jobName =
+                    card
+                        .querySelector("h3")
+                        .innerText
+                        .toLowerCase();
+
+
+                let locationElement =
+                    card.querySelector(".location");
+
+
+                let companyElement =
+                    card.querySelector(".company");
+
+
+                let location =
+                    locationElement
+                        ? locationElement.innerText.toLowerCase()
+                        : "";
+
+
+                let company =
+                    companyElement
+                        ? companyElement.innerText.toLowerCase()
+                        : "";
+
+
+                if (
+
+                    jobName.includes(input) ||
+
+                    location.includes(input) ||
+
+                    company.includes(input)
+
+                ) {
+
+                    card.style.display = "block";
+
+                }
+
+                else {
+
+                    card.style.display = "none";
+
+                }
+
+            });
+
+        }
+
+
+        /* CONTACT JOB */
+
+        function contactJob(number) {
+
+            if (!number) {
+
+                return;
+
+            }
+
+
+            window.location.href =
+                "tel:" + number;
+
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>
