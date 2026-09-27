@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Survival Hub</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            background: linear-gradient(135deg, #141e30, #243b55);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+
+        /* MAIN APP */
+
+        .phone {
+            width: 100%;
+            max-width: 430px;
+            height: min(850px, 95vh);
+
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(25px);
+
+            border-radius: 40px;
+
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.6);
+
+            overflow: hidden;
+
+            display: flex;
+            flex-direction: column;
+
+            position: relative;
+
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+
+        /* STATUS BAR */
+
+        .status {
+            height: 32px;
+            min-height: 32px;
+
+            color: white;
+            font-size: 12px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 0 20px;
+        }
+
+
+        /* HEADER */
+
+        .header {
+            padding: 20px 24px 15px;
+            color: white;
+        }
+
+        .header h2 {
+            font-size: clamp(21px, 6vw, 27px);
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 13px;
+            opacity: 0.8;
+            margin-top: 3px;
+        }
+
+
+        /* CONTENT */
+
+        .content {
+            flex: 1;
+
+            padding: 20px 22px 100px;
+
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 18px;
+
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+
+        /* CARDS */
+
+        .card {
+            min-height: 150px;
+
+            border-radius: 28px;
+
+            background: rgba(255, 255, 255, 0.12);
+
+            display: flex;
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+
+            font-size: clamp(38px, 10vw, 52px);
+
+            color: white;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+
+            border: 1px solid rgba(255, 255, 255, 0.08);
+
+            user-select: none;
+        }
+
+        .card span {
+            font-size: 14px;
+            font-weight: 500;
+            margin-top: 8px;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .card:active {
+            transform: scale(0.96);
+        }
+
+
+        /* EMERGENCY BUTTON */
+
+        .fab {
+            position: absolute;
+
+            bottom: 92px;
+            right: 22px;
+
+            width: 60px;
+            height: 60px;
+
+            border-radius: 50%;
+
+            background: linear-gradient(
+                135deg,
+                #ff512f,
+                #dd2476
+            );
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 26px;
+
+            color: white;
+
+            text-decoration: none;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 10px 30px rgba(221, 36, 118, 0.4);
+
+            z-index: 5;
+        }
+
+
+        /* NAVBAR */
+
+        .bottom-nav {
+            height: 78px;
+            min-height: 78px;
+
+            background: rgba(255, 255, 255, 0.1);
+
+            display: flex;
+
+            justify-content: space-around;
+            align-items: center;
+
+            color: white;
+
+            border-top:
+                1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .nav-item {
+            flex: 1;
+
+            display: flex;
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: center;
+
+            gap: 4px;
+
+            font-size: 12px;
+
+            cursor: pointer;
+
+            opacity: 0.8;
+
+            transition: 0.2s;
+
+            user-select: none;
+        }
+
+        .nav-item:hover {
+            opacity: 1;
+            transform: translateY(-2px);
+        }
+
+        .nav-item:first-child {
+            opacity: 1;
+        }
+
+        .nav-icon {
+            font-size: 22px;
+        }
+
+
+        /* TABLET */
+
+        @media (min-width: 600px) {
+
+            .phone {
+                max-width: 500px;
+            }
+
+            .content {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 22px;
+            }
+
+            .card {
+                min-height: 170px;
+            }
+        }
+
+
+        /* MOBILE VIEW */
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 0;
+                min-height: 100vh;
+                width: 100%;
+                overflow: hidden;
+            }
+
+            .phone {
+                width: 100%;
+                max-width: none;
+
+                height: 100vh;
+                min-height: 100vh;
+
+                border-radius: 0;
+
+                border-left: none;
+                border-right: none;
+
+                box-shadow: none;
+            }
+
+            .status {
+                height: 30px;
+                min-height: 30px;
+
+                padding: 0 16px;
+
+                font-size: 11px;
+            }
+
+            .header {
+                padding: 18px 20px 12px;
+            }
+
+            .header h2 {
+                font-size: 24px;
+            }
+
+            .header p {
+                font-size: 12px;
+            }
+
+            .content {
+                padding: 16px 16px 100px;
+
+                gap: 14px;
+
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+
+            .card {
+                width: 100%;
+
+                min-height: 145px;
+
+                border-radius: 22px;
+
+                font-size: 42px;
+            }
+
+            .card span {
+                font-size: 13px;
+
+                margin-top: 7px;
+            }
+
+            .fab {
+                width: 56px;
+                height: 56px;
+
+                right: 16px;
+                bottom: 86px;
+
+                font-size: 24px;
+            }
+
+            .bottom-nav {
+                width: 100%;
+
+                height: 72px;
+                min-height: 72px;
+            }
+
+            .nav-item {
+                font-size: 11px;
+            }
+
+            .nav-icon {
+                font-size: 21px;
+            }
+        }
+
+
+        /* SMALL PHONES */
+
+        @media (max-width: 380px) {
+
+            .header {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .header h2 {
+                font-size: 22px;
+            }
+
+            .content {
+                padding: 14px 12px 96px;
+
+                gap: 10px;
+            }
+
+            .card {
+                min-height: 130px;
+
+                border-radius: 20px;
+
+                font-size: 38px;
+            }
+
+            .card span {
+                font-size: 12px;
+            }
+
+            .fab {
+                right: 14px;
+                bottom: 84px;
+            }
+
+            .bottom-nav {
+                height: 72px;
+                min-height: 72px;
+            }
+        }
+
+
+        /* VERY SMALL PHONES */
+
+        @media (max-width: 320px) {
+
+            .content {
+                gap: 9px;
+            }
+
+            .card {
+                min-height: 120px;
+
+                font-size: 36px;
+            }
+
+            .card span {
+                font-size: 11px;
+            }
+
+            .header h2 {
+                font-size: 21px;
+            }
+
+            .header p {
+                font-size: 11px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="phone">
+
+
+    <!-- STATUS BAR -->
+
+    <div class="status">
+
+        <div id="time">14:26</div>
+
+        <div>
+            📶 🔋85%
+        </div>
+
+    </div>
+
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <h2>Survival Hub</h2>
+
+        <p>
+            Smart Assistance for Everyone
+        </p>
+
+    </div>
+
+
+    <!-- MAIN CONTENT -->
+
+    <div class="content">
+
+
+        <!-- FOOD -->
+
+        <div
+            class="card"
+            onclick="location.href='/food-page'"
+        >
+
+            🍛
+
+            <span>
+                Food
+            </span>
+
+        </div>
+
+
+        <!-- JOBS -->
+
+        <div
+            class="card"
+            onclick="location.href='/jobs-page'"
+        >
+
+            💼
+
+            <span>
+                Jobs
+            </span>
+
+        </div>
+
+
+        <!-- HEALTH -->
+
+        <div
+            class="card"
+            onclick="location.href='/health-page'"
+        >
+
+            ❤️
+
+            <span>
+                Health
+            </span>
+
+        </div>
+
+
+        <!-- SCHEMES -->
+
+        <div
+            class="card"
+            onclick="location.href='/schemes-page'"
+        >
+
+            🏛
+
+            <span>
+                Schemes
+            </span>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- EMERGENCY -->
+
+    <a
+        href="tel:112"
+        class="fab"
+        aria-label="Emergency call"
+    >
+        📞
+    </a>
+
+
+    <!-- BOTTOM NAV -->
+
+    <div class="bottom-nav">
+
+
+        <!-- HOME -->
+
+        <div
+            class="nav-item"
+            onclick="location.href='/'"
+        >
+
+            <div class="nav-icon">
+                🏠
+            </div>
+
+            <span>
+                Home
+            </span>
+
+        </div>
+
+
+        <!-- NEARBY -->
+
+        <div
+            class="nav-item"
+            onclick="location.href='/nearby'"
+        >
+
+            <div class="nav-icon">
+                📍
+            </div>
+
+            <span>
+                Nearby
+            </span>
+
+        </div>
+
+
+        <!-- PROFILE -->
+
+        <div
+            class="nav-item"
+            onclick="location.href='/profile-page'"
+        >
+
+            <div class="nav-icon">
+                👤
+            </div>
+
+            <span>
+                Profile
+            </span>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+
+    /* LIVE TIME */
+
+    function updateTime() {
+
+        const now = new Date();
+
+        let hours =
+            now.getHours();
+
+        let minutes =
+            now.getMinutes();
+
+
+        hours =
+            String(hours).padStart(2, "0");
+
+        minutes =
+            String(minutes).padStart(2, "0");
+
+
+        document.getElementById("time").innerText =
+            hours + ":" + minutes;
+
+    }
+
+
+    updateTime();
+
+    setInterval(updateTime, 30000);
+
+
+</script>
+
+
+</body>
+
+</html>

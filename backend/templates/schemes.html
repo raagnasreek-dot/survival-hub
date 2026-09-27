@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Welfare Schemes | Survival Hub</title>
+
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+
+body{
+
+    background:
+        linear-gradient(
+            135deg,
+            #141e30,
+            #243b55
+        );
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    min-height:100vh;
+
+    padding:20px;
+}
+
+
+/* PHONE FRAME */
+
+.phone{
+
+    width:380px;
+
+    max-width:100%;
+
+    height:760px;
+
+    max-height:95vh;
+
+    background:
+        rgba(255,255,255,0.08);
+
+    backdrop-filter:blur(25px);
+
+    border-radius:40px;
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,0.6);
+
+    overflow:hidden;
+
+    display:flex;
+
+    flex-direction:column;
+
+    border:
+        1px solid rgba(255,255,255,0.2);
+
+    color:white;
+}
+
+
+/* STATUS BAR */
+
+.status{
+
+    height:28px;
+
+    flex-shrink:0;
+
+    background:#0f172a;
+
+    color:white;
+
+    font-size:11px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 15px;
+}
+
+
+/* HEADER */
+
+.header{
+
+    background:
+        linear-gradient(
+            135deg,
+            #00c6ff,
+            #0072ff
+        );
+
+    padding:18px 20px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    flex-shrink:0;
+}
+
+
+.back{
+
+    cursor:pointer;
+
+    font-size:22px;
+
+    width:34px;
+
+    height:34px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+    transition:0.2s;
+}
+
+
+.back:hover{
+
+    background:
+        rgba(255,255,255,0.2);
+}
+
+
+.header h2{
+
+    font-size:20px;
+
+    font-weight:600;
+}
+
+
+/* CONTENT */
+
+.content{
+
+    flex:1;
+
+    overflow-y:auto;
+
+    padding:20px;
+
+    -webkit-overflow-scrolling:touch;
+}
+
+
+/* SCROLLBAR */
+
+.content::-webkit-scrollbar{
+
+    width:5px;
+}
+
+
+.content::-webkit-scrollbar-thumb{
+
+    background:#00c6ff;
+
+    border-radius:10px;
+}
+
+
+/* SCHEME CARD */
+
+.card{
+
+    background:
+        rgba(255,255,255,0.12);
+
+    padding:18px;
+
+    border-radius:18px;
+
+    margin-bottom:15px;
+
+    transition:0.3s;
+
+    border:
+        1px solid rgba(255,255,255,0.06);
+}
+
+
+.card:hover{
+
+    background:
+        rgba(255,255,255,0.2);
+
+    transform:
+        translateY(-3px);
+}
+
+
+.card h3{
+
+    font-size:15px;
+
+    margin-bottom:7px;
+
+    line-height:1.4;
+
+    word-break:break-word;
+}
+
+
+.card p{
+
+    font-size:12px;
+
+    opacity:0.85;
+
+    margin-bottom:10px;
+
+    line-height:1.5;
+
+    word-break:break-word;
+}
+
+
+.card .label{
+
+    font-weight:600;
+
+    opacity:1;
+
+    margin-bottom:3px;
+}
+
+
+/* BUTTON */
+
+.btn{
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff512f,
+            #dd2476
+        );
+
+    border:none;
+
+    color:white;
+
+    padding:8px 14px;
+
+    border-radius:10px;
+
+    font-size:12px;
+
+    cursor:pointer;
+
+    text-decoration:none;
+
+    display:inline-block;
+
+    margin-top:4px;
+
+    transition:0.2s;
+
+    -webkit-tap-highlight-color:transparent;
+}
+
+
+.btn:hover{
+
+    opacity:0.9;
+
+    transform:
+        scale(1.03);
+}
+
+
+.btn:active{
+
+    transform:
+        scale(0.97);
+}
+
+
+/* NO DATA */
+
+.no-data{
+
+    text-align:center;
+
+    padding:40px 15px;
+
+    font-size:13px;
+
+    opacity:0.75;
+}
+
+
+/* BOTTOM NAV */
+
+.nav{
+
+    height:65px;
+
+    flex-shrink:0;
+
+    background:
+        rgba(255,255,255,0.95);
+
+    display:flex;
+
+    justify-content:space-around;
+
+    align-items:center;
+
+    border-top:
+        1px solid rgba(255,255,255,0.3);
+
+    color:#333;
+
+    padding-bottom:env(safe-area-inset-bottom);
+}
+
+
+.nav div{
+
+    text-align:center;
+
+    font-size:12px;
+
+    cursor:pointer;
+
+    transition:0.2s;
+
+    min-width:55px;
+
+    -webkit-tap-highlight-color:transparent;
+}
+
+
+.nav div:hover{
+
+    color:#0072ff;
+
+    transform:
+        translateY(-2px);
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    body{
+
+        padding:0;
+
+        background:#f8fafc;
+
+        align-items:stretch;
+    }
+
+
+    .phone{
+
+        width:100%;
+
+        max-width:none;
+
+        height:100vh;
+
+        max-height:none;
+
+        min-height:100vh;
+
+        border-radius:0;
+
+        border:none;
+
+        box-shadow:none;
+    }
+
+
+    .status{
+
+        padding:
+            0
+            14px;
+    }
+
+
+    .header{
+
+        padding:16px;
+    }
+
+
+    .header h2{
+
+        font-size:18px;
+    }
+
+
+    .content{
+
+        padding:16px;
+    }
+
+
+    .card{
+
+        padding:15px;
+
+        border-radius:16px;
+
+        margin-bottom:12px;
+    }
+
+
+    .card h3{
+
+        font-size:14px;
+    }
+
+
+    .card p{
+
+        font-size:11px;
+
+        line-height:1.55;
+    }
+
+
+    .btn{
+
+        padding:8px 12px;
+
+        font-size:11px;
+    }
+
+
+    .nav{
+
+        height:64px;
+    }
+
+
+    .nav div{
+
+        font-size:11px;
+
+        min-width:50px;
+    }
+
+}
+
+
+/* SMALL PHONES */
+
+@media(max-width:380px){
+
+    .content{
+
+        padding:14px;
+    }
+
+
+    .header{
+
+        padding:14px;
+    }
+
+
+    .header h2{
+
+        font-size:17px;
+    }
+
+
+    .card{
+
+        padding:13px;
+    }
+
+
+    .card h3{
+
+        font-size:13px;
+    }
+
+
+    .card p{
+
+        font-size:10.5px;
+    }
+
+
+    .btn{
+
+        padding:7px 10px;
+
+        font-size:10px;
+    }
+
+
+    .nav div{
+
+        font-size:10px;
+
+        min-width:45px;
+    }
+
+}
+
+
+/* VERY SMALL PHONES */
+
+@media(max-width:320px){
+
+    .content{
+
+        padding:12px;
+    }
+
+
+    .card{
+
+        padding:12px;
+    }
+
+
+    .card h3{
+
+        font-size:12.5px;
+    }
+
+
+    .card p{
+
+        font-size:10px;
+    }
+
+
+    .btn{
+
+        font-size:9.5px;
+
+        padding:7px 9px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="phone">
+
+
+<!-- STATUS BAR -->
+
+<div class="status">
+
+    <div>14:32</div>
+
+    <div>📶 5G 🔋92%</div>
+
+</div>
+
+
+<!-- HEADER -->
+
+<div class="header">
+
+    <div
+        class="back"
+        onclick="history.back()"
+    >
+        ⬅
+    </div>
+
+    <h2>🏛 Welfare Schemes</h2>
+
+</div>
+
+
+<!-- CONTENT -->
+
+<div class="content">
+
+
+{% if schemes %}
+
+
+    {% for scheme in schemes %}
+
+
+        <!-- SCHEME CARD -->
+
+        <div class="card">
+
+
+            <h3>
+                🏛 {{ scheme.scheme_name }}
+            </h3>
+
+
+            <p>
+                {{ scheme.description }}
+            </p>
+
+
+            {% if scheme.eligibility %}
+
+                <p>
+
+                    <span class="label">
+                        👤 Eligibility:
+                    </span>
+
+                    {{ scheme.eligibility }}
+
+                </p>
+
+            {% endif %}
+
+
+            {% if scheme.apply_location %}
+
+                <p>
+
+                    <span class="label">
+                        📍 Apply At:
+                    </span>
+
+                    {{ scheme.apply_location }}
+
+                </p>
+
+            {% endif %}
+
+
+            <a
+                class="btn"
+                href="https://www.google.com/search?q={{ scheme.scheme_name | urlencode }}"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                🔎 More Info
+            </a>
+
+
+        </div>
+
+
+    {% endfor %}
+
+
+{% else %}
+
+
+    <div class="no-data">
+
+        🏛 No welfare schemes available right now.
+
+    </div>
+
+
+{% endif %}
+
+
+</div>
+
+
+<!-- BOTTOM NAV -->
+
+<div class="nav">
+
+
+    <div onclick="location.href='/'">
+
+        🏠<br>
+        Home
+
+    </div>
+
+
+    <div onclick="location.href='/health-page'">
+
+        🏥<br>
+        Health
+
+    </div>
+
+
+    <div onclick="location.href='/schemes-page'">
+
+        🏛<br>
+        Schemes
+
+    </div>
+
+
+    <div onclick="location.href='/profile-page'">
+
+        👤<br>
+        Profile
+
+    </div>
+
+
+</div>
+
+
+</div>
+
+
+</body>
+
+</html>
